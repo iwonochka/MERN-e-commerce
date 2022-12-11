@@ -13,7 +13,14 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, "Password is required."],
-    }
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+      required: [true, "User role is required."],
+    },
+    cart: [{type: Schema.Types.ObjectId, ref: 'Product'}],
+    favs: [{type: Schema.Types.ObjectId, ref: 'Product'}]
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
