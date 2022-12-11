@@ -31,12 +31,15 @@ const productSchema = new Schema(
       type: Number,
       required: [true, "Specify number of gears"]
     },
-    image: {
-      type: String,
+    images: {
+      type: Array,
     },
     colors: {
       type: Array,
       required: [true, "Specify available colors"]
+    },
+    sizes: {
+      type: Array,
     },
     isAvailable: {
       type: Boolean,
