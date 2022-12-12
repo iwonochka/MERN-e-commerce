@@ -7,20 +7,23 @@ router.get("/", (req, res, next) => {
   res.json("All good in here");
 });
 
-//GET cart
-router.get("/cart", async (req, res) => {
+//POST cart
+  router.post("/cart", (req, res, next) => {
+    const { product, color, size } = req.body;
+    // CartItem.create({product: product, colorChoice: color, sizeChoice: size})
+    // .then((cartItem) => {
+    //   res.json(cartItem)
+    // })
+    // .catch((err) => res.json(err));
+  })
 
-  const products = user.cart
-  });
-
+  //GET cart
   router.get("/cart", (req, res, next) => {
-    const user = User.findById(req.session.currentUser).populate("cart")
-    .then((user) => {
-      const products = user.cart
-      res.json(user, products)
-    })
-    .catch((err) => res.json(err));
-
+    //We get the user and then user.cart
+  //   .then((cart) => {
+  //     res.json(cart)
+  //   })
+  //   .catch((err) => res.json(err));
   })
 
 module.exports = router;
