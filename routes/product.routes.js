@@ -16,7 +16,7 @@ router.get("/products", (req, res, next) => {
 //  GET /api/bikes/:bikeId -  Retrieves a specific bike by id
 router.get("/products/:productId", (req, res, next) => {
   const { productId } = req.params;
-  console.log("productid", productId)
+  // console.log("productid", productId)
 
   if (!mongoose.Types.ObjectId.isValid(productId)) {
     res.status(400).json({ message: "Specified id is not valid" });
