@@ -28,6 +28,19 @@ router.get("/products/:productId", (req, res, next) => {
 })
 
 
+router.get("/products/addFavourite", (req, res, next) => {
+  const { productId } = req.params;
+  // console.log("productid", productId)
+
+  if (!mongoose.Types.ObjectId.isValid(productId)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
+  Product.findById(productId)
+  .then((product) => res.json(product))
+  .catch((err) => res.json(err));
+})
+
 
 
 module.exports = router;
