@@ -15,7 +15,11 @@ const orderSchema = new Schema(
     // total: {
     //   type: Number
     },
-    user: {type: Schema.Types.ObjectId, ref: 'User'}
+    user: {type: Schema.Types.ObjectId, ref: 'User'},
+    isPaid: {
+      type: Boolean,
+      default: false
+    }
   },
   {
     timestamps: true,

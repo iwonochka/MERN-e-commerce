@@ -15,9 +15,18 @@ router.post("/order", (req, res, next) => {
   .catch((err) => console.log(err))
 });
 
-router.post("/updateFavs", (req, res, next) => {
-  const {favs, user} = req.body;
-  const found = User.findOneAndUpdate({_id: user._id}, {favs: favs})
+router.post("/addFavs", (req, res, next) => {
+  const {product, user} = req.body;
+  console.log(req.body)
+  const found = User.findOneAndUpdate({_id: user._id}, {$push: {favs: product}})
+  .then((user) => res.json(user))
+  .catch((err) => console.log(err))
+});
+
+router.post("/deleteFavs", (req, res, next) => {
+  const {product, user} = req.body;
+  console.log(req.body)
+  const found = User.findOneAndUpdate({_id: user._id}, {$pull: {favs: product}})
   .then((user) => res.json(user))
   .catch((err) => console.log(err))
 });
