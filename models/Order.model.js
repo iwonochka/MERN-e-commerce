@@ -4,21 +4,14 @@ const orderSchema = new Schema(
   {
     items: {
       type: Array,
-    //   product: {type: Schema.Types.ObjectId, ref: 'Product'},
-    //   sizeChoice: {
-    //     type: String
-    //   },
-    //   colorChoice: {
-    //     type: String
-    //   }
-    // },
-    // total: {
-    //   type: Number
     },
     user: {type: Schema.Types.ObjectId, ref: 'User'},
     isPaid: {
       type: Boolean,
       default: false
+    },
+    amount: {
+      type: Number
     }
   },
   {

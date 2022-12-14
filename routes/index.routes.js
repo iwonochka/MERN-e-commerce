@@ -8,10 +8,18 @@ router.get("/", (req, res, next) => {
   res.json("All good in here");
 });
 
-router.post("/order", (req, res, next) => {
+router.post("/createOrder", (req, res, next) => {
   const { newOrder} = req.body;
-  Order.create({items: newOrder.items, user: newOrder.user})
+  Order.create({items: newOrder.items, user: newOrder.user._id, isPaid: newOrder.isPaid, amount: newOrder.amount })
   .then((order) => res.json(order))
+  .catch((err) => console.log(err))
+});
+
+router.get("/orders/:userId", (req, res, next) => {
+  const userId = req.params.userId
+  Order.find({user: userId})
+  .then((orders) => {
+    res.json(orders)})
   .catch((err) => console.log(err))
 });
 
