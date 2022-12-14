@@ -2,25 +2,18 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User.model");
 const Product = require("../models/Product.model");
+const Order = require("../models/Order.model");
 
 router.get("/", (req, res, next) => {
   res.json("All good in here");
 });
 
-//GET cart
-router.get("/cart", async (req, res) => {
-
-  const products = user.cart
-  });
-
-  router.get("/cart", (req, res, next) => {
-    const user = User.findById(req.session.currentUser).populate("cart")
-    .then((user) => {
-      const products = user.cart
-      res.json(user, products)
-    })
-    .catch((err) => res.json(err));
-
-  })
+router.post("/order", (req, res, next) => {
+  const { newOrder} = req.body;
+  Order.create({items: newOrder.items, user: newOrder.user})
+  .then((order) => res.json(order)
+  .catch((err) => console.log(err))
+  )
+});
 
 module.exports = router;
