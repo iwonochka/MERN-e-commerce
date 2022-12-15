@@ -12,6 +12,9 @@ const orderSchema = new Schema(
     },
     amount: {
       type: Number
+    },
+    orderDetails: {
+      type: Object
     }
   },
   {

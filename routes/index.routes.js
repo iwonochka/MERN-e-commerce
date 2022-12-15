@@ -10,7 +10,7 @@ router.get("/", (req, res, next) => {
 
 router.post("/createOrder", (req, res, next) => {
   const { newOrder} = req.body;
-  Order.create({items: newOrder.items, user: newOrder.user._id, isPaid: newOrder.isPaid, amount: newOrder.amount })
+  Order.create({items: newOrder.items, user: newOrder.user._id, isPaid: newOrder.isPaid, amount: newOrder.amount, orderDetails: newOrder.orderDetails})
   .then((order) => res.json(order))
   .catch((err) => console.log(err))
 });
