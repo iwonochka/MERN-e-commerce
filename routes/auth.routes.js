@@ -45,11 +45,11 @@ router.post("/signup", (req, res, next) => {
 
   // Check the users collection if a user with the same email already exists
   User.findOne({ email })
-    .then((foundUser) => {
+      .then((foundUser) => {
       // If the user with the same email already exists, send an error response
       if (foundUser) {
         res.status(400).json({ message: "User already exists." });
-        return;
+      return;
       }
 
       // If email is unique, proceed to hash the password

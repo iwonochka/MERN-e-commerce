@@ -19,8 +19,12 @@ const userSchema = new Schema(
       default: false,
       required: [true, "User role is required."],
     },
-    cart: [{type: Schema.Types.ObjectId, ref: 'Product'}],
-    favs: [{type: Schema.Types.ObjectId, ref: 'Product'}]
+    cart: {
+      type: Array
+    },
+    favs: {
+      type: Array
+    }
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
