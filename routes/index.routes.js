@@ -9,6 +9,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/createOrder", (req, res, next) => {
+  console.log("from post Order, req-body:", req.body)
   const { newOrder} = req.body;
   Order.create({items: newOrder.items, user: newOrder.user._id, isPaid: newOrder.isPaid, amount: newOrder.amount, orderDetails: newOrder.orderDetails})
   .then((order) => res.json(order))
