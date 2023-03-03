@@ -8,13 +8,23 @@ router.get("/", (req, res, next) => {
   res.json("All good in here");
 });
 
-router.post("/createOrder", (req, res, next) => {
-  console.log("from post Order, req-body:", req.body)
-  const { newOrder} = req.body;
-  Order.create({items: newOrder.items, user: newOrder.user._id, isPaid: newOrder.isPaid, amount: newOrder.amount, orderDetails: newOrder.orderDetails})
-  .then((order) => res.json(order))
-  .catch((err) => console.log(err))
+router.post("/createOrder", async (req, res, next) => {
+  const { newOrder } = req.body;
+  try {
+    const user = await User.findById(newOrder.user._id);
+    const order = await Order.create({
+      items: newOrder.items,
+      user: user._id,
+      isPaid: newOrder.isPaid,
+      amount: newOrder.amount,
+      orderDetails: newOrder.orderDetails,
+    });
+    res.json(order);
+  } catch (err) {
+    console.log(err);
+  }
 });
+
 
 router.get("/orders/:userId", (req, res, next) => {
   const userId = req.params.userId
@@ -26,7 +36,6 @@ router.get("/orders/:userId", (req, res, next) => {
 
 router.post("/addFavs", (req, res, next) => {
   const {product, user} = req.body;
-  console.log(req.body)
   const found = User.findOneAndUpdate({_id: user._id}, {$push: {favs: product}})
   .then((user) => res.json(user))
   .catch((err) => console.log(err))
@@ -34,7 +43,6 @@ router.post("/addFavs", (req, res, next) => {
 
 router.post("/deleteFavs", (req, res, next) => {
   const {product, user} = req.body;
-  console.log(req.body)
   const found = User.findOneAndUpdate({_id: user._id}, {$pull: {favs: product}})
   .then((user) => res.json(user))
   .catch((err) => console.log(err))
